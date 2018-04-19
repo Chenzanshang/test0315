@@ -1,5 +1,6 @@
 <?php
-if( !isset($_POST['prod']) || !isset($_POST['price'])
+if(	!isset($_POST['id'])
+	||!isset($_POST['prod']) || !isset($_POST['price'])
 	|| empty($_POST['price']) 
 	|| empty($_POST['prod']) )
 {
@@ -26,8 +27,8 @@ try {
 
 //echo "連線成功";
 
-$stmt = $db->prepare('insert into moneybook (name,cost) values (?,?)');
-$stmt->execute([$_POST['prod'],$_POST['price']]);
+$stmt = $db->prepare('update moneybook set name=?,cost=? where m_id=?');
+$stmt->execute([$_POST['prod'],$_POST['price'],$_POST['id']]);
 
 //echo '新增了';
 //echo $stmt->rowCount();
